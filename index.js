@@ -60,11 +60,13 @@ inquirer.prompt([
         name: "email",
     },
 ]).then((answers) => {
-    var license = answers.license
-    var licenseResults = ''
+    var license = answers.license;
+    var licenseResults = '';
+    var licenseBadge = '';
     generateLicense(license);
     function generateLicense(license) {
         if (license === 'MIT'){
+            licenseBadge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
             inquirer.prompt([
                 {
                     type: 'input',
@@ -74,10 +76,10 @@ inquirer.prompt([
                 {
                     type: 'input',
                     message: "Please list all of the people you want listed in your license.",
-                    name: "mitcollaborators",
+                    name: "licenseCollaborators",
                 },
             ]).then((licenseAnswers) => {
-            licenseResults = `Copyright (c) <${licenseAnswers.year}> <${licenseAnswers.mitcollaborators}>
+            licenseResults = `Copyright (c) <${licenseAnswers.year}> <${licenseAnswers.licenseCollaborators}>
 
             Permission is hereby granted, free of charge, to any person obtaining a copy
             of this software and associated documentation files (the "Software"), to deal
@@ -98,26 +100,118 @@ inquirer.prompt([
             SOFTWARE.`;
             return console.log(licenseResults)
             });
-        } else if (license === 'GNUv2') {
-            licenseResults = "https://www.gnu.org/licenses/gpl-2.0.txt"
+        } else if (license === 'Apache 2.0') {
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    message: "Please input the year of creation.",
+                    name: "year",
+                },
+                {
+                    type: 'input',
+                    message: "Please list all of the people you want listed in your license.",
+                    name: "licenseCollaborators",
+                },
+            ]).then((licenseAnswers) => {
+            licenseResults = `Please refer to this link for the Apache https://www.apache.org/licenses/LICENSE-2.0
+
+            Copyright [${licenseAnswers.year}] [${licenseAnswers.licenseCollaborators}]
+
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at
+         
+              http://www.apache.org/licenses/LICENSE-2.0
+         
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+            `;
+            return console.log(licenseResults)
+            }); 
+        } else if (license === 'GNU GPL v2') {
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    message: "Please input the year of creation.",
+                    name: "year",
+                },
+                {
+                    type: 'input',
+                    message: "Please list all of the people you want listed in your license.",
+                    name: "licenseCollaborators",
+                },
+            ]).then((licenseAnswers) => {
+            licenseResults = `Please refer to this link for the GNU General Public Licences https://www.gnu.org/licenses/gpl-2.0.txt
+            Copyright (C) ${licenseAnswers.year}  ${licenseAnswers.licenseCollaborators}
+
+            This program is free software; you can redistribute it and/or
+            modify it under the terms of the GNU General Public License
+            as published by the Free Software Foundation; either version 2
+            of the License, or (at your option) any later version.
+            
+            This program is distributed in the hope that it will be useful,
+            but WITHOUT ANY WARRANTY; without even the implied warranty of
+            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+            GNU General Public License for more details.
+            
+            You should have received a copy of the GNU General Public License
+            along with this program; if not, write to the Free Software
+            Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+            `;
+            return console.log(licenseResults)
+            });
             // console.log(license)
-        } else if (license === 'GNUv3') {
-            licenseResults = "Please refer to this link for the GNU General Public Licences http://www.gnu.org/licenses/gpl-3.0.txt"
+        } else if (license === 'GNU GPL v3') {
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    message: "Please input the year of creation.",
+                    name: "year",
+                },
+                {
+                    type: 'input',
+                    message: "Please list all of the people you want listed in your license.",
+                    name: "licenseCollaborators",
+                },
+            ]).then((licenseAnswers) => {
+            licenseResults = `Please refer to this link for the GNU General Public Licences http://www.gnu.org/licenses/gpl-3.0.txt
+            Copyright (C) <${licenseAnswers.year}>  <${licenseAnswers.licenseCollaborators}>
+
+            This program is free software: you can redistribute it and/or modify
+            it under the terms of the GNU General Public License as published by
+            the Free Software Foundation, either version 3 of the License, or
+            (at your option) any later version.
+        
+            This program is distributed in the hope that it will be useful,
+            but WITHOUT ANY WARRANTY; without even the implied warranty of
+            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+            GNU General Public License for more details.
+        
+            You should have received a copy of the GNU General Public License
+            along with this program.  If not, see <https://www.gnu.org/licenses/>
+            `;
+            return console.log(licenseResults)
+            });
         }
     }
     // console.log(licenseResults);
     // console.log(answers, licenseResults)
 const generateREADME = ({title, motivation, why, solve, learn, installation, url, collaborators, license, github, email}, licenseResults) => {
     return `# ${title}
+    
+    ${licenseBadge}
 
     ## Table of contents
         * [Description](#description)
         * [Installation] (#installation)
         * [Usage](#usage)
         * [Credits](#credits)
-        * [License](#license)
         * [Application URL](#application-url)
         * [Questions](#questions)
+        * [License](#license)
         
 
     ## Description 
