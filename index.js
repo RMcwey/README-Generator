@@ -1,7 +1,6 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-// TODO: Create an array of questions for user input
+
 inquirer.prompt([
     {
         type: 'input',
@@ -35,19 +34,34 @@ inquirer.prompt([
     },
     {
         type: 'input',
+        message: "Please input the site URL",
+        name: "url",
+    },
+    {
+        type: 'input',
         message: "Please list all your collaborators on this project including yourself and any neccessary third-party assets",
         name: "collaborators",
     },
     {
         type: 'input',
-        message: "Please input the site URL",
-        name: "url",
+        message: "Please input how to test your product. If not applicable, leave empty",
+        name: "test",
     },
     {
         type: 'rawlist',
         name: 'license',
         message: 'Which is better?',
         choices: ['MIT', 'Apache 2.0', 'GNU GPL v2', 'GNU GPL v3'],
+    },
+    {
+        type: 'input',
+        message: "Please input the year of creation.",
+        name: "year",
+    },
+    {
+        type: 'input',
+        message: "Please list all of the people you want listed in your license.",
+        name: "licenseCollaborators",
     },
     {
         type: 'input',
@@ -61,25 +75,16 @@ inquirer.prompt([
     },
 ]).then((answers) => {
     var license = answers.license;
+    var year = answers.year;
+    var licenseCollaborators = answers.licenseCollaborators
     var licenseResults = '';
     var licenseBadge = '';
-    generateLicense(license);
-    function generateLicense(license) {
+    generateLicense(answers);
+    function generateLicense(answers) {
         if (license === 'MIT'){
             licenseBadge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    message: "Please input the year of creation.",
-                    name: "year",
-                },
-                {
-                    type: 'input',
-                    message: "Please list all of the people you want listed in your license.",
-                    name: "licenseCollaborators",
-                },
-            ]).then((licenseAnswers) => {
-            licenseResults = `Copyright (c) <${licenseAnswers.year}> <${licenseAnswers.licenseCollaborators}>
+
+            licenseResults = `Copyright (c) <${year}> <${licenseCollaborators}>
 
             Permission is hereby granted, free of charge, to any person obtaining a copy
             of this software and associated documentation files (the "Software"), to deal
@@ -98,24 +103,13 @@ inquirer.prompt([
             LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
             SOFTWARE.`;
-            return console.log(licenseResults)
-            });
+
         } else if (license === 'Apache 2.0') {
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    message: "Please input the year of creation.",
-                    name: "year",
-                },
-                {
-                    type: 'input',
-                    message: "Please list all of the people you want listed in your license.",
-                    name: "licenseCollaborators",
-                },
-            ]).then((licenseAnswers) => {
+            licenseBadge = "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
+
             licenseResults = `Please refer to this link for the Apache https://www.apache.org/licenses/LICENSE-2.0
 
-            Copyright [${licenseAnswers.year}] [${licenseAnswers.licenseCollaborators}]
+            Copyright [${year}] [${licenseCollaborators}]
 
             Licensed under the Apache License, Version 2.0 (the "License");
             you may not use this file except in compliance with the License.
@@ -129,23 +123,12 @@ inquirer.prompt([
             See the License for the specific language governing permissions and
             limitations under the License.
             `;
-            return console.log(licenseResults)
-            }); 
+           
         } else if (license === 'GNU GPL v2') {
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    message: "Please input the year of creation.",
-                    name: "year",
-                },
-                {
-                    type: 'input',
-                    message: "Please list all of the people you want listed in your license.",
-                    name: "licenseCollaborators",
-                },
-            ]).then((licenseAnswers) => {
+            licenseBadge = "[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)"
+
             licenseResults = `Please refer to this link for the GNU General Public Licences https://www.gnu.org/licenses/gpl-2.0.txt
-            Copyright (C) ${licenseAnswers.year}  ${licenseAnswers.licenseCollaborators}
+            Copyright (C) ${year}  ${licenseCollaborators}
 
             This program is free software; you can redistribute it and/or
             modify it under the terms of the GNU General Public License
@@ -161,24 +144,13 @@ inquirer.prompt([
             along with this program; if not, write to the Free Software
             Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
             `;
-            return console.log(licenseResults)
-            });
+           
             // console.log(license)
         } else if (license === 'GNU GPL v3') {
-            inquirer.prompt([
-                {
-                    type: 'input',
-                    message: "Please input the year of creation.",
-                    name: "year",
-                },
-                {
-                    type: 'input',
-                    message: "Please list all of the people you want listed in your license.",
-                    name: "licenseCollaborators",
-                },
-            ]).then((licenseAnswers) => {
+            licenseBadge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
+
             licenseResults = `Please refer to this link for the GNU General Public Licences http://www.gnu.org/licenses/gpl-3.0.txt
-            Copyright (C) <${licenseAnswers.year}>  <${licenseAnswers.licenseCollaborators}>
+            Copyright (C) <${year}>  <${licenseCollaborators}>
 
             This program is free software: you can redistribute it and/or modify
             it under the terms of the GNU General Public License as published by
@@ -193,83 +165,63 @@ inquirer.prompt([
             You should have received a copy of the GNU General Public License
             along with this program.  If not, see <https://www.gnu.org/licenses/>
             `;
-            return console.log(licenseResults)
-            });
+            
         }
     }
-    // console.log(licenseResults);
-    // console.log(answers, licenseResults)
-const generateREADME = ({title, motivation, why, solve, learn, installation, url, collaborators, license, github, email}, licenseResults) => {
+
+const generateREADME = ({title, motivation, why, solve, learn, installation, url, collaborators, test, license, year, licenseCollaborators, github, email}, licenseResults) => {
     return `# ${title}
+
+${licenseBadge}
+<br>
+
+## Table of contents
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+* [Live URL](#live-url)
+* [Questions](#questions)
+* [License](#license)
     
-    ${licenseBadge}
 
-    ## Table of contents
-        * [Description](#description)
-        * [Installation] (#installation)
-        * [Usage](#usage)
-        * [Credits](#credits)
-        * [Application URL](#application-url)
-        * [Questions](#questions)
-        * [License](#license)
-        
+## Description 
 
-    ## Description 
-    Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+- What was your motivation? ${motivation}
+- Why did you build this project? ${why}
+- What problem does it solve? ${solve}
+- What did you learn? ${learn}
 
-    - What was your motivation? ${motivation}
-    - Why did you build this project? ${why}
-    - What problem does it solve? ${solve}
-    - What did you learn? ${learn}
+## Installation
 
-    ## Installation
+${installation}
 
-    What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running. ${installation}
+## Usage
 
-    ## Usage
+Provide instructions and examples for use. Include screenshots as needed.
 
-    Provide instructions and examples for use. Include screenshots as needed.
+## Live URL
+${url}
 
-    ## Live URL
-    ${url}
+## Credits
+${collaborators}
 
-    ## Credits
-    ${collaborators}
+## Tests
 
-    ## How to Contribute
+${test}
 
-    If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+## Questions
+My Github page: https://github.com/${github}
+<br>
+For any questions please contact me at ${email}
 
-    ## Tests
-
-    Provide your tests here.
-
-    ## Questions
-    My Github page: https://github.com/${github}
-    For any questions please contact me at ${email}
-
-    ## License: ${license}
-    ${licenseResults}
+## License 
+<br>
+${license}
+<br>
+${licenseResults}
     `;
 }
-// fs.writeFile('README.md', generateREADME(answers, licenseResults), (err) =>
-//     err ? console.error(err) : console.log('Commit logged!'));
+fs.writeFile('README.md', generateREADME(answers, licenseResults), (err) =>
+    err ? console.error(err) : console.log('README successfully generated!'));
 });
-// const questions = [];
-
-// TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
-
-// // TODO: Create a function to initialize app
-// function init() {}
-
-// // Function call to initialize app
-// init();
-
-
-// ## Badges
-
-// ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-// Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
