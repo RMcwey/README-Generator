@@ -47,7 +47,7 @@ inquirer.prompt([
         type: 'rawlist',
         name: 'license',
         message: 'Which is better?',
-        choices: ['MIT', 'GNUv2', 'GNUv3'],
+        choices: ['MIT', 'Apache 2.0', 'GNU GPL v2', 'GNU GPL v3'],
     },
     {
         type: 'input',
@@ -65,7 +65,19 @@ inquirer.prompt([
     generateLicense(license);
     function generateLicense(license) {
         if (license === 'MIT'){
-            licenseResults = `Copyright (c) <year> <copyright holders>
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    message: "Please input the year of creation.",
+                    name: "year",
+                },
+                {
+                    type: 'input',
+                    message: "Please list all of the people you want listed in your license.",
+                    name: "mitcollaborators",
+                },
+            ]).then((licenseAnswers) => {
+            licenseResults = `Copyright (c) <${licenseAnswers.year}> <${licenseAnswers.mitcollaborators}>
 
             Permission is hereby granted, free of charge, to any person obtaining a copy
             of this software and associated documentation files (the "Software"), to deal
@@ -84,63 +96,66 @@ inquirer.prompt([
             LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
             SOFTWARE.`;
+            return console.log(licenseResults)
+            });
         } else if (license === 'GNUv2') {
             licenseResults = "https://www.gnu.org/licenses/gpl-2.0.txt"
             // console.log(license)
         } else if (license === 'GNUv3') {
-            licenseResults = " http://www.gnu.org/licenses/gpl-3.0.txt"
+            licenseResults = "Please refer to this link for the GNU General Public Licences http://www.gnu.org/licenses/gpl-3.0.txt"
         }
     }
-    console.log(licenseResults);
-    console.log(answers, licenseResults)
+    // console.log(licenseResults);
+    // console.log(answers, licenseResults)
 const generateREADME = ({title, motivation, why, solve, learn, installation, url, collaborators, license, github, email}, licenseResults) => {
     return `# ${title}
-## Table of contents
-    * [Description](#description)
-    * [Installation] (#installation)
-    * [Usage](#usage)
-    * [Credits](#credits)
-    * [License](#license)
-    * [Application URL](#application-url)
-    * [Questions](#questions)
-    
 
-## Description 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+    ## Table of contents
+        * [Description](#description)
+        * [Installation] (#installation)
+        * [Usage](#usage)
+        * [Credits](#credits)
+        * [License](#license)
+        * [Application URL](#application-url)
+        * [Questions](#questions)
+        
 
-- What was your motivation? ${motivation}
-- Why did you build this project? ${why}
-- What problem does it solve? ${solve}
-- What did you learn? ${learn}
+    ## Description 
+    Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
 
-## Installation
+    - What was your motivation? ${motivation}
+    - Why did you build this project? ${why}
+    - What problem does it solve? ${solve}
+    - What did you learn? ${learn}
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running. ${installation}
+    ## Installation
 
-## Usage
+    What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running. ${installation}
 
-Provide instructions and examples for use. Include screenshots as needed.
+    ## Usage
 
-## Live URL
-${url}
+    Provide instructions and examples for use. Include screenshots as needed.
 
-## Credits
-${collaborators}
+    ## Live URL
+    ${url}
 
-## License: ${license}
-${licenseResults}
+    ## Credits
+    ${collaborators}
 
-## How to Contribute
+    ## How to Contribute
 
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+    If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
 
-## Tests
+    ## Tests
 
-Provide your tests here.
+    Provide your tests here.
 
-## Questions
-    My Github page: ${github}
+    ## Questions
+    My Github page: https://github.com/${github}
     For any questions please contact me at ${email}
+
+    ## License: ${license}
+    ${licenseResults}
     `;
 }
 // fs.writeFile('README.md', generateREADME(answers, licenseResults), (err) =>
