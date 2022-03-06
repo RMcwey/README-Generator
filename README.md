@@ -22,7 +22,7 @@
 
 ## Installation
 
-1. Clone repository 2. Make sure that inquirer is installed. If not, then input nmp i inquirer in the terminal. 3. Open terminal and run index 4. input answers
+1. Clone repository 2. Make sure that inquirer is installed. If not, then input `nmp i` inquirer in the terminal. 3. Open terminal and run index by typing in `node index` into the command line in your terminal 4. input answers
 
 ## Usage
 
