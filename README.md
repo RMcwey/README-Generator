@@ -28,6 +28,8 @@
 
 ![image](https://user-images.githubusercontent.com/95650769/156926796-866c36c8-9927-42f2-aa03-25d3c102369f.png)
 
+![image](https://user-images.githubusercontent.com/95650769/156926842-0d1afc52-18ff-4279-8f64-ebbbff78fb0d.png)
+
 <br>
 Link to video demo: https://drive.google.com/file/d/17a1YjSq5gKhqCAFveQJhQ4THTgxULPv9/view
 
