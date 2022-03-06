@@ -26,7 +26,10 @@
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+![image](https://user-images.githubusercontent.com/95650769/156926796-866c36c8-9927-42f2-aa03-25d3c102369f.png)
+
+<br>
+Link to video demo: https://drive.google.com/file/d/17a1YjSq5gKhqCAFveQJhQ4THTgxULPv9/view
 
 ## Live URL
 https://rmcwey.github.io/README-Generator/
