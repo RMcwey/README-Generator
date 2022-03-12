@@ -1,4 +1,4 @@
-# README Generator
+# Test
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <br>
@@ -15,28 +15,28 @@
 
 ## Description 
 
-- What was your motivation? To create an easy to use README Generartor
-- Why did you build this project? To save time when creating READMEs
-- What problem does it solve? With only a few inputs I can create a README for all future projects
-- What did you learn? I learned how to better use node.js and inquirer
+- What was your motivation? To Test
+- Why did you build this project? To Test
+- What problem does it solve? To Test
+- What did you learn? How to test
 
 ## Installation
 
-1. Clone repository 2. Make sure that inquirer is installed. If not, then input nmp i inquirer in the terminal. 3. Open terminal and run index 4. input answers
+1. Test it out 2. Test it some more
 
 ## Usage
 
 Provide instructions and examples for use. Include screenshots as needed.
 
 ## Live URL
-https://rmcwey.github.io/README-Generator/
+www.test.com
 
 ## Credits
-Ross McWey
+Me, Myself and I
 
 ## Tests
 
-Not applicapble for current project
+
 
 ## Questions
 My Github page: https://github.com/RMcwey
@@ -47,7 +47,7 @@ For any questions please contact me at rmcwey@hotmail.com
 <br>
 MIT
 <br>
-Copyright (c) <2022> <Ross McWey>
+Copyright (c) <2022> <Me, Myself and I>
 
             Permission is hereby granted, free of charge, to any person obtaining a copy
             of this software and associated documentation files (the "Software"), to deal

@@ -84,7 +84,7 @@ inquirer.prompt([
         if (license === 'MIT'){
             licenseBadge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
 
-            licenseResults = `Copyright (c) <${year}> <${licenseCollaborators}>
+            licenseResults = `Copyright (c) [${year}] [${licenseCollaborators}]
 
             Permission is hereby granted, free of charge, to any person obtaining a copy
             of this software and associated documentation files (the "Software"), to deal
@@ -128,7 +128,7 @@ inquirer.prompt([
             licenseBadge = "[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)"
 
             licenseResults = `Please refer to this link for the GNU General Public Licences https://www.gnu.org/licenses/gpl-2.0.txt
-            Copyright (C) ${year}  ${licenseCollaborators}
+            Copyright (C) [${year}]  [${licenseCollaborators}]
 
             This program is free software; you can redistribute it and/or
             modify it under the terms of the GNU General Public License
@@ -150,7 +150,7 @@ inquirer.prompt([
             licenseBadge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
 
             licenseResults = `Please refer to this link for the GNU General Public Licences http://www.gnu.org/licenses/gpl-3.0.txt
-            Copyright (C) <${year}>  <${licenseCollaborators}>
+            Copyright (C) [${year}]  [${licenseCollaborators}]
 
             This program is free software: you can redistribute it and/or modify
             it under the terms of the GNU General Public License as published by
@@ -187,10 +187,10 @@ ${licenseBadge}
 
 ## Description 
 
-- What was your motivation? ${motivation}
-- Why did you build this project? ${why}
-- What problem does it solve? ${solve}
-- What did you learn? ${learn}
+- **What was your motivation?** ${motivation}
+- **Why did you build this project?** ${why}
+- **What problem does it solve?** ${solve}
+- **What did you learn?** ${learn}
 
 ## Installation
 
@@ -222,6 +222,6 @@ ${license}
 ${licenseResults}
     `;
 }
-fs.writeFile('README.md', generateREADME(answers, licenseResults), (err) =>
+fs.writeFile('sampleREADME.md', generateREADME(answers, licenseResults), (err) =>
     err ? console.error(err) : console.log('README successfully generated!'));
 });
