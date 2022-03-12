@@ -22,11 +22,16 @@
 
 ## Installation
 
-1. Test it out 2. Test it some more
+1. Clone repository 2. Make sure that inquirer is installed. If not, then input `nmp i` inquirer in the terminal. 3. Open terminal and run index by typing in `node index` into the command line in your terminal 4. input answers
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+![image](https://user-images.githubusercontent.com/95650769/156926796-866c36c8-9927-42f2-aa03-25d3c102369f.png)
+
+![image](https://user-images.githubusercontent.com/95650769/156926842-0d1afc52-18ff-4279-8f64-ebbbff78fb0d.png)
+
+<br>
+Link to video demo: https://drive.google.com/file/d/17a1YjSq5gKhqCAFveQJhQ4THTgxULPv9/view
 
 ## Live URL
 www.test.com
